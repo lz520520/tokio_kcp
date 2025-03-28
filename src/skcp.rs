@@ -213,6 +213,8 @@ impl KcpSocket {
                     self.kcp.peeksize().unwrap_or(0),
                     e
                 );
+                // 2025年3月28日02:38:17 返回错误，以防止阻塞
+                return e.into();
             }
             Err(err) => return Err(err).into(),
             Ok(n) => {
